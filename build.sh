@@ -5,7 +5,7 @@ container=$2
 
 # Build a docker image.
 if [ -z "$(docker images --format {{.Repository}} | grep -x $image)" ]; then
-	docker build --no-cache -t $image .
+	docker build -t $image .
 fi
 
 # Create a docker conatiner.
