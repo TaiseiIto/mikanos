@@ -1,4 +1,5 @@
 #!/bin/bash
+
 source edksetup.sh
 cd Conf
 sed -i "s/^ACTIVE_PLATFORM[\t ]*=[\t ]*.*$/ACTIVE_PLATFORM = MikanLoaderPkg\/MikanLoaderPkg.dsc/" target.txt
