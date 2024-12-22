@@ -6,12 +6,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
 RUN apt upgrade -y
 RUN apt install -y ansible
+RUN apt install -y dosfstools
 RUN apt install -y git
 
 WORKDIR /root
+COPY osbook.patch /root/osbook.patch
 RUN git clone https://github.com/uchan-nos/mikanos-build.git osbook
 WORKDIR /root/osbook
 RUN git checkout 8d4882122ec548ef680b6b5a2ae841a0fd4d07a1
+RUN git apply ../osbook.patch
 WORKDIR /root/osbook/devenv
 RUN ansible-playbook -i ansible_inventory ansible_provision.yml
 WORKDIR /root
@@ -20,6 +23,6 @@ WORKDIR /root/mikanos
 RUN git checkout b5f7740c04002e67a95af16a5c6e073b664bf3f5
 WORKDIR /root/edk2
 RUN ln -s /root/mikanos/MikanLoaderPkg .
-COPY boot_builder.sh /root/edk2/boot_builder.sh
-RUN ./boot_builder.sh
+COPY build_boot_loader.sh /root/edk2/build_boot_loader.sh
+RUN ./build_boot_loader.sh
 
