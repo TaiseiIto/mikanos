@@ -11,6 +11,9 @@ fi
 # Create a docker conatiner.
 if [ -z "$(docker ps -a --format {{.Names}} | grep -x $container)" ]; then
 	docker create -i -t --privileged --name $container $image /bin/bash
+	docker start $container
+	docker exec $container /bin/bash -c "cd /root/edk2 && ./build_boot_loader.sh"
+	docker exec $container /bin/bash -c "cd /root/mikanos && ./build_mikanos.sh"
 fi
 
 # Start the docker container.

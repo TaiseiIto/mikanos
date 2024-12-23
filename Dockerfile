@@ -24,8 +24,6 @@ RUN git checkout b5f7740c04002e67a95af16a5c6e073b664bf3f5
 WORKDIR /root/edk2
 RUN ln -s /root/mikanos/MikanLoaderPkg .
 COPY build_boot_loader.sh /root/edk2/build_boot_loader.sh
-RUN ./build_boot_loader.sh
-WORKDIR /root/mikanos
 COPY build_mikanos.sh /root/mikanos/build_mikanos.sh
-RUN ./build_mikanos.sh
+WORKDIR /root
 
