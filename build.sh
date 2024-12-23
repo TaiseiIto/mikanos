@@ -3,6 +3,7 @@
 image=$1
 container=$2
 vnc_port=$3
+target=$4
 
 # Build a docker image.
 if [ -z "$(docker images --format {{.Repository}} | grep -x $image)" ]; then
@@ -15,13 +16,9 @@ if [ -z "$(docker ps -a --format {{.Names}} | grep -x $container)" ]; then
 	docker start $container
 	docker exec $container /bin/bash -c "cd /root/edk2 && ./build_boot_loader.sh"
 	docker exec $container /bin/bash -c "cd /root/mikanos && ./build_mikanos.sh"
-fi
-
-# Start the docker container.
-if [ -z "$(docker ps --format {{.Names}} | grep -x $container)" ]; then
-	docker start $container
+	docker stop $container
 fi
 
 # Attach the docker container.
-docker attach $container
+docker cp $container:/root/mikanos/$4 $4
 
