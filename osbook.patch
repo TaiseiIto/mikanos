@@ -58,3 +58,13 @@ index ba8233e..9156290 100755
  mkdir -p $MOUNT_POINT
 -sudo mount -o loop $DISK_IMG $MOUNT_POINT
 +mount -o loop $DISK_IMG $MOUNT_POINT
+diff --git a/devenv/run_image.sh b/devenv/run_image.sh
+index 33358b7..722dd04 100755
+--- a/devenv/run_image.sh
++++ b/devenv/run_image.sh
+@@ -23,4 +23,5 @@ qemu-system-x86_64 \
+     -device nec-usb-xhci,id=xhci \
+     -device usb-mouse -device usb-kbd \
+     -monitor stdio \
++    -vnc :0
+     $QEMU_OPTS

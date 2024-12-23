@@ -2,15 +2,16 @@
 
 image=$1
 container=$2
+vnc_port=$3
 
 # Build a docker image.
 if [ -z "$(docker images --format {{.Repository}} | grep -x $image)" ]; then
-	docker build -t $image .
+	docker build --build-arg vnc_port=$vnc_port -t $image .
 fi
 
 # Create a docker conatiner.
 if [ -z "$(docker ps -a --format {{.Names}} | grep -x $container)" ]; then
-	docker create -i -t --privileged --name $container $image /bin/bash
+	docker create -i -t -p $vnc_port:$vnc_port --privileged --name $container $image /bin/bash
 	docker start $container
 	docker exec $container /bin/bash -c "cd /root/edk2 && ./build_boot_loader.sh"
 	docker exec $container /bin/bash -c "cd /root/mikanos && ./build_mikanos.sh"
