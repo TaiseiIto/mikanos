@@ -8,16 +8,17 @@ TARGET=disk.img
 .PHONY: build
 build: $(TARGET)
 
-$(TARGET):
+$(TARGET): delete
 	./build.sh $(IMAGE) $(CONTAINER) $(VNC_PORT) $(TARGET)
 
 .PHONY: delete
 delete:
-	rm $(TARGET)
+	rm -f $(TARGET)
 	./delete.sh $(IMAGE) $(CONTAINER)
 
-.PHONY: rebuild
-rebuild:
-	make delete
-	make build
+.PHONY: run
+run: build
+	docker start $(CONTAINER)
+	docker exec $(CONTAINER) /bin/bash -c "cd /root/mikanos && ./build.sh run"
+	docker stop $(CONTAINER)
 
