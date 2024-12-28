@@ -1,2 +1,2 @@
-# mikanos
-My MikanOS builder
+# My [MikanOS](https://github.com/uchan-nos/mikanos) builder
+
