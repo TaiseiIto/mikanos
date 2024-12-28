@@ -16,6 +16,9 @@ delete:
 	rm -rf $(MOUNT)
 	./delete.sh $(IMAGE) $(CONTAINER)
 
+.PHONY: image
+image: $(TARGET)
+
 .PHONY: run
 run: build
 	docker start $(CONTAINER)
