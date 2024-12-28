@@ -12,7 +12,7 @@ build: $(MOUNT)
 .PHONY: delete
 delete:
 	rm -f $(TARGET)
-	if mountpoint -q $(MOUNT); then umount -l $(MOUNT); fi
+	if mountpoint -q $(MOUNT); then sudo umount -l $(MOUNT); fi
 	rm -rf $(MOUNT)
 	./delete.sh $(IMAGE) $(CONTAINER)
 
