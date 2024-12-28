@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@main
+      - name: Make shell scripts executable
+        run: chmod u+x *.sh
       - name: Build MikanOS
         run: make image
       - name: Upload MikanOS
