@@ -14,7 +14,6 @@ delete:
 	rm -f $(TARGET)
 	if mountpoint -q $(MOUNT); then sudo umount -l $(MOUNT); fi
 	rm -rf $(MOUNT)
-	./delete.sh $(IMAGE) $(CONTAINER)
 
 .PHONY: image
 image: $(TARGET)
