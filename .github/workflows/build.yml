@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - issue1
 jobs:
   build:
     name: build
@@ -11,10 +12,10 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@main
       - name: Build MikanOS
-        run: make image
+        run: make build
       - name: Upload MikanOS
         uses: actions/upload-artifact@main
         with:
           name: MikanOS
-          path: disk.img
+          path: disk
 
