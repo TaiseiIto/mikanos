@@ -11,7 +11,7 @@ build: $(MOUNT)
 
 .PHONY: delete
 delete:
-	delete.sh $(IMAGE) $(CONTAINER) $(TARGET) $(MOUNT)
+	./delete.sh $(IMAGE) $(CONTAINER) $(TARGET) $(MOUNT)
 
 .PHONY: image
 image: $(TARGET)
