@@ -11,9 +11,7 @@ build: $(MOUNT)
 
 .PHONY: delete
 delete:
-	rm -f $(TARGET)
-	if mountpoint -q $(MOUNT); then sudo umount -l $(MOUNT); fi
-	rm -rf $(MOUNT)
+	./delete.sh $(IMAGE) $(CONTAINER) $(TARGET) $(MOUNT)
 
 .PHONY: image
 image: $(TARGET)
@@ -28,6 +26,6 @@ $(MOUNT): $(TARGET)
 	mkdir $@
 	sudo mount -o loop $^ $@
 
-$(TARGET): delete
+$(TARGET):
 	./build.sh $(IMAGE) $(CONTAINER) $(VNC_PORT) $(TARGET)
 
