@@ -17,10 +17,10 @@ delete:
 image: $(TARGET)
 
 .PHONY: run
-run: build
+run:
+	docker stop $(CONTAINER)
 	docker start $(CONTAINER)
 	docker exec $(CONTAINER) /bin/bash -c "cd /root/mikanos && ./build.sh run"
-	docker stop $(CONTAINER)
 
 $(MOUNT): $(TARGET)
 	mkdir $@
