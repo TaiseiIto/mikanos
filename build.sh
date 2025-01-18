@@ -19,6 +19,6 @@ if [ -z "$(docker ps -a --format {{.Names}} | grep -x $container)" ]; then
 	docker stop $container
 fi
 
-# Attach the docker container.
+# Download MikanOS image file.
 docker cp $container:/root/mikanos/$4 $4
 
