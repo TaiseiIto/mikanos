@@ -30,6 +30,10 @@ COPY build_boot_loader.sh /root/edk2/build_boot_loader.sh
 COPY build_mikanos.sh /root/mikanos/build_mikanos.sh
 WORKDIR /root
 
+# Set
+ENV APPS_DIR apps
+ENV RESOURCE_DIR resource
+
 # Expose VNC port.
 ARG vnc_port
 EXPOSE $vnc_port
