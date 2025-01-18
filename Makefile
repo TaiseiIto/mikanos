@@ -20,7 +20,7 @@ image: $(TARGET)
 run:
 	docker stop $(CONTAINER)
 	docker start $(CONTAINER)
-	docker exec $(CONTAINER) /bin/bash -c "cd /root/mikanos && ./build.sh run"
+	docker exec --workdir /root/mikanos $(CONTAINER) ./build.sh run
 
 $(MOUNT): $(TARGET)
 	mkdir $@
