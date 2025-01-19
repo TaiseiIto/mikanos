@@ -14,8 +14,8 @@ fi
 if [ -z "$(docker ps -a --format {{.Names}} | grep -x $container)" ]; then
 	docker create -i -t -p $vnc_port:$vnc_port --privileged --name $container $image /bin/bash
 	docker start $container
-	docker exec $container /bin/bash -c "cd /root/edk2 && ./build_boot_loader.sh"
-	docker exec $container /bin/bash -c "cd /root/mikanos && ./build_mikanos.sh"
+	docker exec --workdir /root/edk2 $container ./build_boot_loader.sh
+	docker exec --workdir /root/mikanos $container ./build_mikanos.sh
 	docker stop $container
 fi
 

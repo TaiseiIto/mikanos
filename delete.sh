@@ -10,7 +10,7 @@ rm -f $target
 
 # Delete mount.
 if mountpoint -q $mount; then sudo umount -l $mount; fi
-rm -rf $mount
+if [ -e $mount ]; then rm -rf $mount; fi
 
 # Stop the docker container.
 if [ -n "$(docker ps --format {{.Names}} | grep -x $container)" ]; then
