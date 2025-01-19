@@ -17,12 +17,14 @@ delete:
 image: $(TARGET)
 
 .PHONY: run
-run:
+run: build
 	docker stop $(CONTAINER)
 	docker start $(CONTAINER)
 	docker exec --workdir /root/mikanos $(CONTAINER) ./build.sh run
 
 $(MOUNT): $(TARGET)
+	if mountpoint -q $@; then sudo umount -l $@; fi
+	if [ -e $@ ] ; then rm -rf $@; fi
 	mkdir $@
 	sudo mount -o loop $^ $@
 
