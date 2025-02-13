@@ -4,12 +4,10 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install softwares.
-RUN apt update
-RUN apt upgrade -y
-RUN apt install -y ansible
-RUN apt install -y dosfstools
-RUN apt install -y git
-RUN apt install -y vim
+RUN apt-get update && apt-get upgrade -y && apt-get install -y ansible
+RUN apt-get update && apt-get upgrade -y && apt-get install -y dosfstools
+RUN apt-get update && apt-get upgrade -y && apt-get install -y git
+RUN apt-get update && apt-get upgrade -y && apt-get install -y vim
 
 # Build MikanOS.
 WORKDIR /root
